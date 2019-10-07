@@ -1,4 +1,4 @@
-public ListNode brute_getIntersectionNode(ListNode headA, ListNode headB) { // O(n*n) runtime, O(1) space
+public ListNode brute_getIntersectionNode(ListNode headA, ListNode headB) { // O(m*n) time, O(1) space
     if(headA == null || headB == null) return null;
     ListNode temp1 = headA, temp2 = headB;
     while(temp1 != null){
@@ -14,8 +14,23 @@ public ListNode brute_getIntersectionNode(ListNode headA, ListNode headB) { // O
     return null; // Unreachable
 } 
 
+public ListNode optimized2_getIntersectionNode(ListNode headA, ListNode headB) { // O(m+n) time, O(m) space 
+        if(headA == null || headB == null) return null;
+        ListNode temp1 = headA, temp2 = headB;
+        ArrayList<ListNode> arr = new ArrayList<ListNode>();
+        while(temp1 != null){
+            arr.add(temp1);
+            temp1 = temp1.next;
+        }
+        while(temp2 != null){
+            if(arr.contains(temp2)) break;
+            temp2 = temp2.next;
+        }
+        return temp2;
+    } 
+
 // Optimized time
-public ListNode optimized_getIntersectionNode(ListNode headA, ListNode headB) { // O(n) runtime, O(1) space
+public ListNode optimized_getIntersectionNode(ListNode headA, ListNode headB) { // O(m+n) time, O(1) space 
     if(headA == null || headB == null) return null;
     ListNode temp1 = headA, temp2 = headB;
     while(temp1 != temp2){
